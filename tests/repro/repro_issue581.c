@@ -271,9 +271,15 @@ TEST(repro_issue581_query_rss_stable) {
     //
     // Until both land this is an honest "not fixed / not provable here" RED, not
     // a false green.
-    FAIL("bug #581 (query-path memory leak) is OPEN and cannot be reproduced in "
-         "this fixture (RSS factor ~1.0 even when leaking) — needs a real "
-         "WAL/committed-pages reproduction tier plus the fix");
+    /* TODO(#581): whitelisted known-red on the non-gating bug-repro board. The
+     * leak is a real OPEN bug; this fixture cannot yet reproduce it, so the test
+     * stays RED (honest "not fixed") rather than vacuously green. Turning it
+     * green requires a real WAL-size / mimalloc-committed-pages reproduction tier
+     * plus the query-path compaction fix (see header). Tracked, not skipped. */
+    FAIL("TODO(#581) whitelisted known-red: query-path memory leak is OPEN and "
+         "cannot be reproduced in this fixture (RSS factor ~1.0 even when "
+         "leaking) — needs a real WAL/committed-pages reproduction tier plus the "
+         "query-path compaction fix");
 }
 
 // -- Suite ------------------------------------------------------------------
